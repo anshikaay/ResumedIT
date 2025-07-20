@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1.0">
+      <link rel="stylesheet" href="resume.css">
+      <title>Resumify:AI RESUME MATCHER</title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="begin">
+                <div class="also">
+              <h1>ResumedIT</h1>
+            
+              <p class="descri">We all have some skills and a resume made but we don't know what to add to that resume to get our dream role in the industry.</p>
+              <p class="descri2">Put your resume here and get free job matches and an AI feedback on how to improve.</p>
+               </div>
+         <form onsubmit="submitForm(); return false;">   
+            <label for="resume">Upload your resume(PDF):</label>
+            <input type="file" id="resume" accept="application/pdf">
+
+            <label for="role">Job role you're looking for:</label>
+            <input type="text" id="role" placeholder="e.g. Frontend Developer">
+            <a>Match Jobs & Get Feedback</a>
+            <button type="submit">Submit</button>
+
+            <div class="results" id="results">
+
+            </div>
+         </form>
+            </div>
+        </div>
+        <script>
+             async function submitForm(){
+                const resume=document.getElementById("resume").files[0];
+                const role=document.getElementById("role").value;
+                const resultsContainer=document.getElementById("results");
+                console.log("submitted");
+                if (!resume||!role){
+                    alert("Please upload a resume and enter job role.")
+                    return;
+                }
+            
+            
+                const formData = new FormData();
+                formData.append("resume", resume);
+                formData.append("role", role);
+
+                resultsContainer.innerHTML = "<p>⏳ Processing... please wait</p>";
+
+                try {
+                   const response = await 
+                   fetch("http://localhost:5000/match", {
+                     method: "POST",
+                     body: formData
+                   });
+
+                   const data = await response.json();
+
+                   let html = "";
+                   data.jobs.forEach(job => {
+                     html += `
+                        <div class="job">
+                          <strong>${job.title} at ${job.company}</strong><br>
+                          Match: ${job.score}%<br>
+                          Skills matched: ${job.matched_skills.join(", ")}<br>
+                          <a href="${job.link}" target="_blank">Apply Now</a>
+                         </div>
+                       `;
+                     });
+
+                  
+
+                    resultsContainer.innerHTML = html;
+
+                 } catch (error) {
+                   console.log("Error:", error);
+                   resultsContainer.innerHTML = "<p style='color: red;'>Error processing request. Please try again later.</p>";
+                     }
+            }
+        </script>
+        
+    </body>
+</html>
