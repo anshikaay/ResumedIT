@@ -3,10 +3,11 @@ import docx
 import os
 import re  #pattern match
 import openai
+import dotenv
 
 
 
-#client=openai.OpenAI(api_key="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")
+#client=openai.OpenAI(api_key=os.getenv("openai_api_key"))
 
 
 
@@ -75,10 +76,6 @@ def extract_skills(text, skill_list):
     
 
 
-#def extract_text_docx(docx_path):
- #   doc=docx.Document(docx_path)
-   # text="\n".join([p.text for p in doc.paragraphs])
-  #  return text
 
 def parse_resume(file_path):
     if file_path.endswith(".pdf"):
@@ -111,8 +108,3 @@ def match_resume_to_job(resume_text,job_text,skill_list):
 
 
 
-
-#pdf_path=r"C:\Users\yadav\Downloads\ANSHIKA Y .pdf"
-#resume_text=extract_text_pdf(pdf_path)
-#parsed_data=extract_fields(resume_text)
-#print(parsed_data)

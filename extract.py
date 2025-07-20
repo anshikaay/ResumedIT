@@ -1,4 +1,6 @@
 import requests
+import os
+import dotenv
 
 from resume import extract_text_pdf,match_resume_to_job,extract_fields,extract_skills
 from flask import Flask,request,jsonify
@@ -25,7 +27,7 @@ def fetch_jobs(query="developer jobs in india",page=1):
                  }
     headers={
         "x-rapidapi-host":"jsearch.p.rapidapi.com",
-        "x-rapidapi-key":"4096652826mshc31af4443a70939p18657ejsndabcc32f33f8"
+        "x-rapidapi-key":os.getenv("x-rapidapi-key")
     }
     response=requests.get(url,headers=headers,params=querystring)
     if response.status_code==200:
