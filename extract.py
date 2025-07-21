@@ -11,7 +11,7 @@ from flask import send_from_directory
 
 
 app=Flask(__name__)
-CORS(app,origins=["https://resume-front-sp2w.onrender.com"])
+CORS(app)
 
 #pdf_path=r"C:\Users\yadav\Downloads\ANSHIKA Y .pdf"
 
