@@ -79,6 +79,8 @@ def match():
       #    ,"feedback":feedback
     })
 
-
+@app.route("/",methods=["GET"])
+def home():
+    return "ResumedIT backend is live. "
 if __name__=="__main__":
       app.run(port=5000)
