@@ -31,7 +31,11 @@
             </div>
         </div>
         <script>
-             async function submitForm(){
+             
+               document.querySelector("form").addEventListener("submit", async (e) => {
+                        e.preventDefault();
+               
+
                 const resume=document.getElementById("resume").files[0];
                 const role=document.getElementById("role").value;
                 const resultsContainer=document.getElementById("results");
@@ -79,7 +83,7 @@
                    resultsContainer.innerHTML = "<p style='color: red;'>Error processing request. Please try again later.</p>";
                      }
                      
-            }
+            })
         </script>
         
     </body>
