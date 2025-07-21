@@ -6,6 +6,10 @@ from resume import extract_text_pdf,match_resume_to_job,extract_fields,extract_s
 from flask import Flask,request,jsonify
 from flask_cors import CORS
 
+from flask import send_from_directory
+
+
+
 app=Flask(__name__)
 CORS(app,origins=["https://resume-front-sp2w.onrender.com"])
 
@@ -79,8 +83,17 @@ def match():
       #    ,"feedback":feedback
     })
 
-@app.route("/",methods=["GET"])
-def home():
-    return "ResumedIT backend is live. "
+@app.route("/")
+def serve_html():
+    return send_from_directory('.','resume.html',as_attachment=False)
+
+@app.route("/resume.css")
+def serve_css():
+    return send_from_directory('.','resume.css',as_attachment=False)
+
+@app.errorhandler(404)
+def not_found(e):
+    return send_from_directory('.','resume.html')
+                               
 if __name__=="__main__":
       app.run(port=5000)
