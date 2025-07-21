@@ -7,7 +7,7 @@ from flask import Flask,request,jsonify
 from flask_cors import CORS
 
 app=Flask(__name__)
-CORS(app,origins=["http://127.0.0.1:5500"])
+CORS(app,origins=["*"])
 
 #pdf_path=r"C:\Users\yadav\Downloads\ANSHIKA Y .pdf"
 
