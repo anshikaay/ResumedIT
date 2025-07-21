@@ -11,7 +11,7 @@ from flask import send_from_directory
 
 
 app=Flask(__name__)
-CORS(app)
+CORS(app,resources={r"/*": {"origins": "*"}})
 
 #pdf_path=r"C:\Users\yadav\Downloads\ANSHIKA Y .pdf"
 
@@ -40,9 +40,11 @@ def fetch_jobs(query="developer jobs in india",page=1):
     else:
         print("Error:",response.status_code,response.text)
         return []
+    
+
 @app.route('/match',methods=['POST'])
 def match():  
-    
+    print("recieved")
     resume_file=request.files["resume"]
     role=request.form.get("role")
     if not resume_file or not role:
@@ -93,7 +95,10 @@ def serve_css():
 
 @app.errorhandler(404)
 def not_found(e):
+
     return send_from_directory('.','resume.html')
-                               
+@app.route('/')
+def home():
+    return "backend alive"                               
 if __name__=="__main__":
       app.run(debug=True)
