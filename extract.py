@@ -96,4 +96,4 @@ def not_found(e):
     return send_from_directory('.','resume.html')
                                
 if __name__=="__main__":
-      app.run(port=5000)
+      app.run(debug=True)
