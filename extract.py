@@ -11,9 +11,9 @@ from flask import send_from_directory
 
 
 app=Flask(__name__)
-CORS(app,resources={r"/*": {"origins": "*"}})
+CORS(app)
 
-#pdf_path=r"C:\Users\yadav\Downloads\ANSHIKA Y .pdf"
+
 
 
 
@@ -31,7 +31,7 @@ def fetch_jobs(query="developer jobs in india",page=1):
                  }
     headers={
         "x-rapidapi-host":"jsearch.p.rapidapi.com",
-        "x-rapidapi-key":os.getenv("x-rapidapi-key")
+        "x-rapidapi-key":"4096652826mshc31af4443a70939p18657ejsndabcc32f33f8"
     }
     response=requests.get(url,headers=headers,params=querystring)
     if response.status_code==200:
@@ -44,7 +44,8 @@ def fetch_jobs(query="developer jobs in india",page=1):
 
 @app.route('/match',methods=['POST'])
 def match():  
-    print("recieved")
+    print("hello")
+    print("request method",request.method)
     resume_file=request.files["resume"]
     role=request.form.get("role")
     if not resume_file or not role:
@@ -97,8 +98,7 @@ def serve_css():
 def not_found(e):
 
     return send_from_directory('.','resume.html')
-@app.route('/')
-def home():
-    return "backend alive"                               
+
+
 if __name__=="__main__":
-      app.run(debug=True)
+      app.run(port=5000)
