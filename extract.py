@@ -1,6 +1,6 @@
 import requests
 import os
-import dotenv
+from dotenv import load_dotenv
 
 from resume import extract_text_pdf,match_resume_to_job,extract_fields,extract_skills
 from flask import Flask,request,jsonify

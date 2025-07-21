@@ -3,7 +3,7 @@ import docx
 import os
 import re  #pattern match
 import openai
-import dotenv
+from dotenv import load_dotenv
 
 
 
