@@ -9,3 +9,4 @@ Designed REST APIs for job postings, candidate evaluation, and scoring workflows
 Added authentication system and role-based access for recruiters and users.
 
 Automated screening process to significantly reduce manual resume shortlisting effort
+This project has been deployed via Render.
